@@ -6,10 +6,11 @@
 /*   By: saifalha <saifalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 09:15:00 by saifalha          #+#    #+#             */
-/*   Updated: 2025/07/21 10:10:26 by saifalha         ###   ########.fr       */
+/*   Updated: 2025/08/04 11:05:22 by saifalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
 
 size_t	ft_strlen(const char *s)

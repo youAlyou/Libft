@@ -5,56 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saifalha <saifalha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 09:45:00 by saifalha          #+#    #+#             */
-/*   Updated: 2025/07/28 13:24:20 by saifalha         ###   ########.fr       */
+/*   Created: 2025/08/04 10:13:00 by saifalha          #+#    #+#             */
+/*   Updated: 2025/08/04 10:16:14 by saifalha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static int	count_size(int n)
+static char	*ft_char(char *s, unsigned int number, long int len)
 {
-	int	i;
-
-	i = 0;
-	if (n <= 0)
-		i++;
-	if (n < 0)
-		n *= -1;
-	while (n != 0)
+	while (number > 0)
 	{
-		n /= 10;
-		i++;
+		s[len--] = 48 + (number % 10);
+		number = number / 10;
 	}
-	return (i);
+	return (s);
 }
 
-char	*ft_itoa(int num)
+static long int	ft_len(int n)
 {
-	char		*dst;
-	int			count;
-	int			i;
-	long int	n;
+	int	len;
 
-	n = num;
-	count = count_size(n);
-	i = 0;
-	dst = (char *)malloc((count + 1) * sizeof(char));
-	if (!dst)
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
+	{
+		len++;
+		n = n / 10;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	char				*s;
+	long int			len;
+	unsigned int		number;
+	int					sign;
+
+	sign = 1;
+	len = ft_len(n);
+	s = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(s))
 		return (NULL);
-	dst[count] = '\0';
+	s[len--] = '\0';
+	if (n == 0)
+		s[0] = '0';
 	if (n < 0)
 	{
-		dst[0] = '-';
-		n *= -1;
-		i++;
+		sign *= -1;
+		number = n * -1;
+		s[0] = '-';
 	}
-	while (count > i)
-	{
-		count--;
-		dst[count] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (dst);
+	else
+		number = n;
+	s = ft_char(s, number, len);
+	return (s);
 }
